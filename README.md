@@ -1,24 +1,23 @@
-# Flash Chatbot
+# StudyBuddy
 
 ## Run locally
 
 1. Install Node.js 18 or newer.
-2. From this folder, install dependencies:
+2. Create a `.env` file next to `server.js` and set your OpenAI-compatible provider credentials:
+
+   ```powershell
+   LLM_API_KEY=your_api_key
+   LLM_BASE_URL=https://api.groq.com/openai/v1
+   LLM_MODEL=openai/gpt-oss-20b
+   ```
+
+   Keep the key private. Do not commit `.env`.
+
+3. Install dependencies, start the server, and open `http://localhost:3000`:
 
    ```powershell
    npm install
-   ```
-
-3. Create a `.env` file in this folder and add your Gemini API key:
-
-   ```text
-   GEMINI_API_KEY=your_gemini_api_key
-   ```
-
-4. Start the server and open `http://localhost:3000`:
-
-   ```powershell
    npm start
    ```
 
-The API key stays on the server and must not be added to source control. The chatbot uses the `gemini-3.1-flash-lite` model.
+StudyBuddy is limited to student learning. “Any subject” allows academic subjects; choosing Math, Science, History, English, or Coding narrows the chat to that subject. Out-of-domain requests should be declined.

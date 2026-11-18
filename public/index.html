@@ -119,12 +119,12 @@ textarea::placeholder{color:var(--muted)}
 
 <div class="composer">
   <form class="box" id="form">
-    <textarea id="input" rows="1" placeholder="Ask StudyBuddy anything…" aria-label="Message"></textarea>
+    <textarea id="input" rows="1" placeholder="Ask a study question…" aria-label="Message"></textarea>
     <button class="send" id="send" type="submit" aria-label="Send message" disabled>
       <svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
     </button>
   </form>
-  <p class="note">Chats aren’t saved. StudyBuddy can make mistakes, so check important facts in your notes.</p>
+  <p class="note">StudyBuddy only helps with student learning. Chats aren’t saved; check important facts in your notes.</p>
 </div>
 
 <script>
@@ -189,7 +189,7 @@ async function send(text){
   input.value='';grow();
   var c=addRow('bot','<span class="dots"><i></i><i></i><i></i></span>');
   try{
-    var r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:chatHistory,subject:tag})});
+    var r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:chatHistory,subject:subject})});
     var d=await r.json();
     if(!r.ok)throw new Error(d.error||'Something went wrong.');
     chatHistory.push({role:'assistant',content:d.reply});
@@ -217,7 +217,7 @@ subjects.forEach(function(s,i){
   if(i===0)subject=s;
   b.onclick=function(){
     subject=s;
-    input.placeholder=(s==='Any subject')?'Ask StudyBuddy anything…':'Ask a '+s+' question…';
+    input.placeholder=(s==='Any subject')?'Ask a study question…':'Ask a '+s+' question…';
     [].forEach.call(subjectsEl.children,function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
   };
   subjectsEl.appendChild(b);
